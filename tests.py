@@ -1,3 +1,5 @@
+# Execução de testes do processo de integração
+
 import requests
 from decouple import config
 
@@ -9,8 +11,8 @@ url = f"http://{DOMAIN}:{PORT_API}/usuarios/"
 
 # Dados que serão enviados para a API
 usuarios = [
-    {"nome": "1623", "email": "lucas@email.com", "age": 30},
-    {"nome": "1624", "email": "jonatas@email.com", "age": 25}
+    {"nome": "1704", "email": "1704@email.com", "age": 30},
+    {"nome": "1705", "email": "1705@email.com", "age": 25}
 ]
 
 # Enviando a requisição POST para a API

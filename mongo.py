@@ -1,5 +1,8 @@
+# Implementação de conexão com o MongoDB
+
 import asyncio
 from motor.motor_asyncio import AsyncIOMotorClient
+from bson import ObjectId
 
 # URL de conexão ao MongoDB
 MONGO_URL = "mongodb://localhost:27017"
@@ -20,10 +23,35 @@ async def inclusao(nome, email, age):
     return resultado
 
 
+# Função assíncrona para consultar usuário por ID
+async def consulta(id_mongo):
+    try:
+        resultado = await colecao_usuarios.find_one({"_id": ObjectId(id_mongo)})
+        return resultado
+    except Exception as e:
+        print(f"Erro ao buscar usuário: {e}")
+        return None
+
+
 # Executar apenas se for o script principal
 if __name__ == "__main__":
-    nome = "João"
-    email = "joao@gmail.com"
-    age = 34
-    resultado = asyncio.run(inclusao(nome=nome, email=email, age=age))  # Executa a função assíncrona
-    print(resultado)
+    async def main():
+        nome = "João"
+        email = "joao@gmail.com"
+        age = 34
+
+        # Inserir um usuário no banco
+        # id_inserido = await inclusao(nome, email, age)
+
+        # Consultar o usuário pelo ID gerado
+        id_inserido = "679bd1919f912ee5ce06dff8"
+        resultado = await consulta(id_inserido)
+
+        if resultado:
+            print(f"Nome do usuário: {resultado['nome']}")
+            print(f"Email do usuário: {resultado['email']}")
+            print(f"Idade do usuário: {resultado['age']}")
+        else:
+            print("Usuário não encontrado.")
+
+    asyncio.run(main())  # Executa as funções assíncronas

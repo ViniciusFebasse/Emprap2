@@ -1,3 +1,5 @@
+# Implementação de função para registrar ID do Mongo na fila do RabbitMQ
+
 import pika
 from decouple import config
 
@@ -5,7 +7,7 @@ from decouple import config
 def registrar_id_mongo(id_mongo):
     try:
         DOMAIN = f"{config('DOMAIN')}"
-        fila = "ids_mongo"
+        fila = f"{config('FILA')}"
 
         # Conectar ao RabbitMQ
         connection = pika.BlockingConnection(pika.ConnectionParameters(DOMAIN))
