@@ -1,15 +1,19 @@
-from fastapi.testclient import TestClient
-from main import app
-import json
+import requests
 
-client = TestClient(app)
+# URL da API
+url = "http://127.0.0.1:8000/usuarios/"
 
-def test_upload():
-    file_data = json.dumps([
-        {"name": "João Silva", "email": "joao.silva@example.com", "teste": 30},
-        {"name": "Maria Oliveira", "email": "maria.oliveira@example.com", "age": 25}
-    ])
+# Dados que serão enviados para a API
+usuarios = [
+    {"nome": "Lucas", "email": "lucas@email.com", "age": 30},
+    {"nome": "Jônatas", "email": "jonatas@email.com", "age": 25}
+]
 
-    response = client.post("/upload/", files={"file": ("users.json", file_data, "application/json")})
-    assert response.status_code == 200
-    assert "mongo_id" in response.json()
+# Enviando a requisição POST para a API
+response = requests.post(url, json=usuarios)
+
+# Exibindo a resposta da API
+if response.status_code == 200:
+    print("Resposta da API:", response.json())
+else:
+    print(f"Erro {response.status_code}: {response.text}")
