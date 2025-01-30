@@ -43,7 +43,7 @@ def inserir_usuario(session, nome, email, idade):
 
 
 # Função principal
-def main():
+def main(nome, email, age):
     # Conectar ao banco e criar a tabela (caso não exista)
     engine = criar_conexao()
 
@@ -52,10 +52,10 @@ def main():
     session = Session()
 
     # Inserir um usuário como exemplo
-    inserir_usuario(session, "João", "joao@example.com", 34)
+    inserir_usuario(session, nome, email, age)
 
     session.close()  # Fechar a sessão
 
 
 if __name__ == "__main__":
-    main()
+    main(nome="Shirley", email="shirley@gmail.com", age=39)

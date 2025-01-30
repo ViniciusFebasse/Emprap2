@@ -4,6 +4,7 @@ import pika
 import asyncio  # Para rodar a função assíncrona
 from decouple import config
 from mongo import consulta  # Importando a função assíncrona
+from mysql_db import main
 
 fila = f"{config('FILA')}"
 DOMAIN = config('DOMAIN')
@@ -26,9 +27,17 @@ def callback(ch, method, properties, body):
 
     if resultado:
         print(f"Resultado da consulta no MongoDB: {resultado}")
-        print(f"Nome do usuário: {resultado.get('nome')}")
-        print(f"Email do usuário: {resultado.get('email')}")
-        print(f"Idade do usuário: {resultado.get('age')}")
+
+        nome = resultado.get('nome')
+        email = resultado.get('email')
+        age = resultado.get('age')
+
+        print(f"Nome do usuário: {nome}")
+        print(f"Email do usuário: {email}")
+        print(f"Idade do usuário: {age}")
+
+        # Inserindo no MySQL
+        main(nome=nome, email=email, age=age)
     else:
         print("⚠️ Usuário não encontrado no MongoDB.")
 

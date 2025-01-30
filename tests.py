@@ -11,8 +11,8 @@ url = f"http://{DOMAIN}:{PORT_API}/usuarios/"
 
 # Dados que serão enviados para a API
 usuarios = [
-    {"nome": "1704", "email": "1704@email.com", "age": 30},
-    {"nome": "1705", "email": "1705@email.com", "age": 25}
+    {"nome": "1812", "email": "1812@email.com", "age": 30},
+    {"nome": "1813", "email": "1813@email.com", "age": 25}
 ]
 
 # Enviando a requisição POST para a API
