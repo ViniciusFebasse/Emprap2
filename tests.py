@@ -1,12 +1,16 @@
 import requests
+from decouple import config
+
+DOMAIN = config('DOMAIN')
+PORT_API = config('PORT_API')
 
 # URL da API
-url = "http://127.0.0.1:8000/usuarios/"
+url = f"http://{DOMAIN}:{PORT_API}/usuarios/"
 
 # Dados que serão enviados para a API
 usuarios = [
-    {"nome": "Lucas", "email": "lucas@email.com", "age": 30},
-    {"nome": "Jônatas", "email": "jonatas@email.com", "age": 25}
+    {"nome": "1623", "email": "lucas@email.com", "age": 30},
+    {"nome": "1624", "email": "jonatas@email.com", "age": 25}
 ]
 
 # Enviando a requisição POST para a API

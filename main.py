@@ -8,6 +8,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from mongo import inclusao
+from filas import registrar_id_mongo
 
 # Definindo o modelo do usuário
 class Usuario(BaseModel):
@@ -49,7 +50,14 @@ async def criar_usuarios(usuarios: List[Usuario]):
             else:
                 resultado = await inclusao(nome=usuario.nome, email=usuario.email, age=usuario.age)
 
-                print("ID do usuário inserido:", resultado.inserted_id)
+                obj_mongo = resultado.inserted_id
+                id_mongo = str(obj_mongo)
+
+                print(f"ID do usuário no MongoDB: {id_mongo}")
+                print(f"Tipo do ID do usuário no MongoDB: {type(id_mongo)}")
+                response = registrar_id_mongo(id_mongo)
+                print(f"Resposta da função registrar_id_mongo: {response}")
+
                 qtd_usuarios_criados += 1
 
         mensagem = f"Foram recebidos com sucesso {len(usuarios)} usuários na listagem e {qtd_usuarios_criados} usuários foram criados no banco de dados."
