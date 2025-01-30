@@ -5,8 +5,8 @@ url = "http://127.0.0.1:8000/usuarios/"
 
 # Dados que serão enviados para a API
 usuarios = [
-    {"nome": "João", "email": "joao@email.com", "idade": 30},
-    {"nome": "Maria", "email": "maria@email.com", "idade": 25}
+    {"nome": "João", "email": "joao@email.com", "age": 30},
+    {"nome": "Maria", "email": "maria@email.com", "age": 25}
 ]
 
 # Enviando a requisição POST para a API

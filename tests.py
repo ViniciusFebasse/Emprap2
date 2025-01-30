@@ -6,7 +6,7 @@ client = TestClient(app)
 
 def test_upload():
     file_data = json.dumps([
-        {"name": "João Silva", "email": "joao.silva@example.com", "age": 30},
+        {"name": "João Silva", "email": "joao.silva@example.com", "teste": 30},
         {"name": "Maria Oliveira", "email": "maria.oliveira@example.com", "age": 25}
     ])
 
