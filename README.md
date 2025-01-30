@@ -21,3 +21,7 @@ Documentação para ativar o Management: https://www.rabbitmq.com/docs/managemen
 - reinicie o PC
 - faça um telnet para verificar a instalação: telnet 127.0.0.1 5672
 - abra a página: http://localhost:15672/. Usuário: guest, Senha: guest
+
+# MySQL
+- comando para acessar o mysql: mysql -u root -p
+- crie o database com CREATE DATABASE embrap2; no CMD
