@@ -6,28 +6,31 @@ import time
 from motor.motor_asyncio import AsyncIOMotorClient
 from bson import ObjectId
 from registra_log import registra_log
-import datetime as dt
+from decouple import config
 
-data_agora = dt.datetime.now()
-data_agora = data_agora.strftime("%Y-%m-%d %H:%M:%S")
+from parametros import busca_data_agora
+
+data_agora = busca_data_agora()
 
 # URL de conexão ao MongoDB
-MONGO_URL = "mongodb://localhost:27017"
+MONGO_URL = config('MONGO_URL')
 
 # Conectar ao MongoDB
 client = AsyncIOMotorClient(MONGO_URL)
-db = client["Embrap2"]  # Nome do banco de dados
-colecao_usuarios = db["uploads"]  # Nome da coleção (equivalente a tabela)
+db = client[config('NOME_DB_MONGO')]  # Nome do banco de dados
+colecao_usuarios = db[config('NOME_COLECAO_MONGO')]  # Nome da coleção (equivalente a tabela)
 
 
-# Função assíncrona para testar a inserção
+# Função assíncrona para realizar a inserção
 async def inclusao(nome, email, age):
     try:
         usuario_teste = {"nome": nome, "email": email, "age": age}
 
+        # Registro do usuário no Mongo DB
         response = await colecao_usuarios.insert_one(usuario_teste)
         id_mongo = str(response.inserted_id)
         registra_log(log=f"Usuário {nome} registrado com sucesso no MongoDB", data_hora=data_agora)
+
     except Exception as e:
         print(f"Erro ao inserir usuário: {e}")
         registra_log(log=f"Erro ao inserir usuário no MongoDB", data_hora=data_agora)
@@ -42,6 +45,7 @@ async def consulta(id_mongo):
         resultado = await colecao_usuarios.find_one({"_id": ObjectId(id_mongo)})
         registra_log(log=f"Usuário de id {id_mongo} consultado com sucesso no MongoDB", data_hora=data_agora)
         return resultado
+
     except Exception as e:
         registra_log(log=f"Erro ao consultar usuário de id {id_mongo} no MongoDB", data_hora=data_agora)
         return None

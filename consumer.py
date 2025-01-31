@@ -1,15 +1,13 @@
 # Consumidor de mensagens do RabbitMQ
 
 import pika
-import asyncio  # Para rodar a função assíncrona
+import asyncio
 from decouple import config
-from mongo import consulta  # Importando a função assíncrona
+from mongo import consulta
 from mysql_db import main
-from registra_log import registra_log
-import datetime as dt
+from parametros import busca_data_agora
 
-data_agora = dt.datetime.now()
-data_agora = data_agora.strftime("%Y-%m-%d %H:%M:%S")
+data_agora = busca_data_agora()
 
 fila = f"{config('FILA')}"
 DOMAIN = config('DOMAIN')

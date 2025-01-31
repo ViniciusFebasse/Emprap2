@@ -3,11 +3,11 @@
 import pika
 from decouple import config
 from registra_log import registra_log
-import datetime as dt
+from parametros import busca_data_agora
 
-data_agora = dt.datetime.now()
-data_agora = data_agora.strftime("%Y-%m-%d %H:%M:%S")
+data_agora = busca_data_agora()
 
+# Registra ID do Mongo na fila do RabbitMQ
 def registrar_id_mongo(id_mongo):
     try:
         DOMAIN = f"{config('DOMAIN')}"

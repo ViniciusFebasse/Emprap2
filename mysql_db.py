@@ -1,15 +1,17 @@
+# Arquivo para encapsular a lógica de conexão com o banco de dados MySQL e inserção de dados na tabela 'users'.
+
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import OperationalError
 from registra_log import registra_log
-import datetime as dt
+from decouple import config
+from parametros import busca_data_agora
 
-data_agora = dt.datetime.now()
-data_agora = data_agora.strftime("%Y-%m-%d %H:%M:%S")
+data_agora = busca_data_agora()
 
 # Definir a URL de conexão com o MySQL
-DATABASE_URL = "mysql+mysqlconnector://root:JCeDo1eou#@localhost:3306/embrap2"
+DATABASE_URL = config('DATABASE_URL_MYSQL')
 
 # Criar uma base para as classes mapeadas
 Base = declarative_base()
@@ -17,7 +19,7 @@ Base = declarative_base()
 
 # Definir o modelo de dados (tabela 'users')
 class User(Base):
-    __tablename__ = 'users'
+    __tablename__ = config('TABLE_MYSQL')
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False)

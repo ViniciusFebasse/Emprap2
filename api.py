@@ -11,10 +11,9 @@ from mongo import inclusao
 from filas import registrar_id_mongo
 
 from registra_log import registra_log
-import datetime as dt
+from parametros import busca_data_agora
 
-data_agora = dt.datetime.now()
-data_agora = data_agora.strftime("%Y-%m-%d %H:%M:%S")
+data_agora = busca_data_agora()
 
 # Definindo o modelo do usuário
 class Usuario(BaseModel):
@@ -57,6 +56,7 @@ async def criar_usuarios(usuarios: List[Usuario]):
                 id_mongo = resultado
 
                 if id_mongo:
+                    # Enviar ID do MongoDB para a fila do RabbitMQ
                     response = registrar_id_mongo(id_mongo)
                     qtd_usuarios_criados += 1
                 else:

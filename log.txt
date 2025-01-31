@@ -1,0 +1,7 @@
+2025-01-31 16:03:17: API de criação de usuários requisitada
+2025-01-31 16:03:17: Usuário 1603 registrado com sucesso no MongoDB
+2025-01-31 16:03:17: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679d1e7611ee56232817dd63
+2025-01-31 16:03:17: Foram recebidos com sucesso 1 usuários na listagem e 1 usuários foram criados no banco de dados.
+2025-01-31 15:13:38: Usuário de id 679d1e7611ee56232817dd63 consultado com sucesso no MongoDB
+2025-01-31 15:13:38: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-01-31 15:13:38: Usuário 1603 inserido com sucesso no MySQL!
