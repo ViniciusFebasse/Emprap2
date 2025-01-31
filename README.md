@@ -5,7 +5,7 @@
 - Vinícius Ferreira Bandeira Serra
 
 ## Definições
-- LINGUAGEM DE PROGRAMAÇÃO: Python 3.10
+- LINGUAGEM DE PROGRAMAÇÃO: Python 3.11
 - DESCRIÇÃO SUSCINTA: API para criação de usuários, que processa e persiste os dados no MongoDB. Na sequência o id do
 usuário é enviado para uma fila no RabbitMQ. Um consumer processa o id e faz o registro no MySQL. Sendo que cada 
 operação de sucesso ou falha é registrada em um arquivo txt.

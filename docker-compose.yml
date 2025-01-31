@@ -1,35 +1,44 @@
 version: '3.8'
 
 services:
-  fastapi:
+  fastapi_app:
     build: .
     container_name: fastapi_app
     ports:
       - "8000:8000"
     depends_on:
-      - mongo
-      - rabbitmq
-      - mysql
+      - mongo_db
+      - mysql_db
+      - rabbitmq_service
+    env_file:
+      - .env
 
-  mongo:
-    image: mongo
+  mongo_db:
+    image: mongo:latest
     container_name: mongo_db
+    restart: always
     ports:
-      - "27017:27017"
+      - "27018:27017"  # Ajuste conforme necessário
+    volumes:
+      - mongo_data:/data/db
 
-  rabbitmq:
-    image: "rabbitmq:3-management"
-    container_name: rabbitmq
+  mysql_db:
+    image: mysql:latest
+    container_name: mysql_db
+    restart: always
+    ports:
+      - "3307:3306"  # Evitar conflito com o MySQL local
+    environment:
+      MYSQL_ROOT_PASSWORD: "JCeDo1eou#"
+      MYSQL_DATABASE: "embrap2"
+
+  rabbitmq_service:
+    image: "rabbitmq:management"
+    container_name: rabbitmq_service
+    restart: always
     ports:
       - "5672:5672"
       - "15672:15672"
 
-  mysql:
-    image: mysql:5.7
-    container_name: mysql_db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: fastapi_db
-    ports:
-      - "3306:3306"
+volumes:
+  mongo_data:
