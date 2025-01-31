@@ -10,6 +10,12 @@ from fastapi.responses import JSONResponse
 from mongo import inclusao
 from filas import registrar_id_mongo
 
+from registra_log import registra_log
+import datetime as dt
+
+data_agora = dt.datetime.now()
+data_agora = data_agora.strftime("%Y-%m-%d %H:%M:%S")
+
 # Definindo o modelo do usuário
 class Usuario(BaseModel):
     nome: str
@@ -30,9 +36,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 # Endpoint para receber uma lista de usuários
 @app.post("/usuarios/")
 async def criar_usuarios(usuarios: List[Usuario]):
-    print("Usuários recebidos:", usuarios)
+    registra_log(log="API de criação de usuários requisitada", data_hora=data_agora)
     tipo_dados = type(usuarios)
-    print("Tipo da variável 'usuarios':", tipo_dados)
 
     # Verifica o tipo de dados
     if tipo_dados == list:
@@ -41,32 +46,29 @@ async def criar_usuarios(usuarios: List[Usuario]):
 
         for usuario in usuarios:
             # Verifica os campos do main.Usuario
-            print("Campos do usuário:", usuario.nome, usuario.email, usuario.age)
             if not hasattr(usuario, "nome") or not hasattr(usuario, "email") or not hasattr(usuario, "age"):
-                mensagem = "Erro: os dados dos usuário devem possuir as chaves nome, email e age."
-                print(mensagem)
-                return "Erro: os dados dos usuário devem possuir as chaves nome, email e age."
+                mensagem = "Erro no processamento da API: os dados dos usuário devem possuir as chaves nome, email e age."
+                registra_log(log=mensagem, data_hora=data_agora)
+                return mensagem
 
             else:
                 resultado = await inclusao(nome=usuario.nome, email=usuario.email, age=usuario.age)
 
-                obj_mongo = resultado.inserted_id
-                id_mongo = str(obj_mongo)
+                id_mongo = resultado
 
-                print(f"ID do usuário no MongoDB: {id_mongo}")
-                print(f"Tipo do ID do usuário no MongoDB: {type(id_mongo)}")
-                response = registrar_id_mongo(id_mongo)
-                print(f"Resposta da função registrar_id_mongo: {response}")
-
-                qtd_usuarios_criados += 1
+                if id_mongo:
+                    response = registrar_id_mongo(id_mongo)
+                    qtd_usuarios_criados += 1
+                else:
+                    return "Erro ao inserir usuário no MongoDB."
 
         mensagem = f"Foram recebidos com sucesso {len(usuarios)} usuários na listagem e {qtd_usuarios_criados} usuários foram criados no banco de dados."
-        print(mensagem)
+        registra_log(log=mensagem, data_hora=data_agora)
 
         return {"message": mensagem}
     else:
         mensagem = "Erro: os dados enviados não são uma lista de usuários."
-        print(mensagem)
+        registra_log(log=mensagem, data_hora=data_agora)
         return "Erro: os dados enviados não são uma lista de usuários."
 
 

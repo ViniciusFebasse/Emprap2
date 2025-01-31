@@ -2,7 +2,11 @@
 
 import pika
 from decouple import config
+from registra_log import registra_log
+import datetime as dt
 
+data_agora = dt.datetime.now()
+data_agora = data_agora.strftime("%Y-%m-%d %H:%M:%S")
 
 def registrar_id_mongo(id_mongo):
     try:
@@ -13,32 +17,32 @@ def registrar_id_mongo(id_mongo):
         connection = pika.BlockingConnection(pika.ConnectionParameters(DOMAIN))
         channel = connection.channel()
 
-        print(connection)
-
         # Declarar a fila (caso ainda não exista)
         channel.queue_declare(queue=fila, durable=True)  # `durable=True` mantém a fila após reinícios
 
         # Mensagem a ser enviada
-        mensagem = id_mongo
+        mensagem = f"ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: {id_mongo}"
 
         # Publicar a mensagem na fila
         channel.basic_publish(
             exchange='',
             routing_key=fila,  # Nome da fila
-            body=mensagem,
+            body=id_mongo,
             properties=pika.BasicProperties(
                 delivery_mode=2  # Garante que a mensagem será persistida
             )
         )
 
-        print(f"📩 Mensagem enviada para a fila: {mensagem}")
+        registra_log(log=mensagem, data_hora=data_agora)
 
         # Fechar a conexão
         connection.close()
 
-        return "Mensagem enviada com sucesso para a fila."
+        return mensagem
     except Exception as e:
-        return f"Erro ao enviar mensagem para a fila: {e}"
+        mensagem = f"Erro ao enviar mensagem para a fila do RabbitMq: {id_mongo}"
+        registra_log(log=mensagem, data_hora=data_agora)
+        return mensagem
 
 
 if __name__ == "__main__":

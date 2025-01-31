@@ -1,0 +1,44 @@
+
+2025-01-31 15:06:51.135966: 
+API de criação de usuários requisitada
+2025-01-31 15:06:51.004770: Usuário 1506 registrado com sucesso no MongoDB
+2025-01-31 15:09:24: 
+API de criação de usuários requisitada
+2025-01-31 15:09:24: Usuário 1509 registrado com sucesso no MongoDB
+2025-01-31 15:11:16: 
+API de criação de usuários requisitada
+2025-01-31 15:11:16: Usuário 1509 registrado com sucesso no MongoDB
+2025-01-31 15:11:16: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679d124802d15f0fab2712ad
+2025-01-31 15:11:16: Foram recebidos com sucesso 1 usuários na listagem e 1 usuários foram criados no banco de dados.
+2025-01-31 15:13:48: 
+API de criação de usuários requisitada
+2025-01-31 15:13:48: Usuário 1513 registrado com sucesso no MongoDB
+2025-01-31 15:13:48: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679d12de8e3b168dda41d9d3
+2025-01-31 15:13:48: Foram recebidos com sucesso 1 usuários na listagem e 1 usuários foram criados no banco de dados.
+2025-01-31 15:13:38: Usuário de id 679d12de8e3b168dda41d9d3 consultado com sucesso no MongoDB
+2025-01-31 15:13:38: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-01-31 15:13:38: Usuário 1513 inserido com sucesso no MySQL!
+2025-01-31 15:14:36: API de criação de usuários requisitada
+2025-01-31 15:14:36: Usuário 1515 registrado com sucesso no MongoDB
+2025-01-31 15:14:36: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679d130e1f6b83e0ab33a6fa
+2025-01-31 15:14:36: Foram recebidos com sucesso 1 usuários na listagem e 1 usuários foram criados no banco de dados.
+2025-01-31 15:13:38: Usuário de id 679d130e1f6b83e0ab33a6fa consultado com sucesso no MongoDB
+2025-01-31 15:13:38: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-01-31 15:13:38: Usuário 1515 inserido com sucesso no MySQL!
+2025-01-31 15:15:08: API de criação de usuários requisitada
+2025-01-31 15:15:08: Usuário 1515 registrado com sucesso no MongoDB
+2025-01-31 15:15:08: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679d132d5cd5a17fed31e337
+2025-01-31 15:13:38: Usuário de id 679d132d5cd5a17fed31e337 consultado com sucesso no MongoDB
+2025-01-31 15:15:08: Usuário 1515 registrado com sucesso no MongoDB
+2025-01-31 15:15:08: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679d132d5cd5a17fed31e338
+2025-01-31 15:15:08: Usuário 1515 registrado com sucesso no MongoDB
+2025-01-31 15:13:38: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-01-31 15:15:08: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679d132d5cd5a17fed31e339
+2025-01-31 15:15:08: Foram recebidos com sucesso 3 usuários na listagem e 3 usuários foram criados no banco de dados.
+2025-01-31 15:13:38: Usuário 1515 inserido com sucesso no MySQL!
+2025-01-31 15:13:38: Usuário de id 679d132d5cd5a17fed31e338 consultado com sucesso no MongoDB
+2025-01-31 15:13:38: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-01-31 15:13:38: Usuário 1515 inserido com sucesso no MySQL!
+2025-01-31 15:13:38: Usuário de id 679d132d5cd5a17fed31e339 consultado com sucesso no MongoDB
+2025-01-31 15:13:38: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-01-31 15:13:38: Usuário 1515 inserido com sucesso no MySQL!

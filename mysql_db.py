@@ -2,6 +2,11 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import OperationalError
+from registra_log import registra_log
+import datetime as dt
+
+data_agora = dt.datetime.now()
+data_agora = data_agora.strftime("%Y-%m-%d %H:%M:%S")
 
 # Definir a URL de conexão com o MySQL
 DATABASE_URL = "mysql+mysqlconnector://root:JCeDo1eou#@localhost:3306/embrap2"
@@ -27,19 +32,27 @@ def criar_conexao():
     # Criar as tabelas no banco de dados, caso não existam
     try:
         Base.metadata.create_all(engine)
-        print(f"Tabelas criadas ou verificadas com sucesso no banco '{DATABASE_URL.split('/')[-1]}'.")
+        mensagem = f"Tabelas criadas ou verificadas com sucesso no MySQL '{DATABASE_URL.split('/')[-1]}'."
+        registra_log(log=mensagem, data_hora=data_agora)
     except OperationalError as e:
-        print(f"Erro ao conectar ou criar tabelas no banco de dados: {e}")
+        mensagem = f"Erro ao conectar ou criar tabelas no banco de dados: {e}"
+        registra_log(log=mensagem, data_hora=data_agora)
 
     return engine
 
 
 # Função para inserir um usuário na tabela
 def inserir_usuario(session, nome, email, idade):
-    usuario = User(name=nome, email=email, age=idade)
-    session.add(usuario)
-    session.commit()
-    print(f"Usuário {nome} inserido com sucesso!")
+    try:
+        usuario = User(name=nome, email=email, age=idade)
+        session.add(usuario)
+        session.commit()
+        mensagem = f"Usuário {nome} inserido com sucesso no MySQL!"
+        registra_log(log=mensagem, data_hora=data_agora)
+
+    except Exception as e:
+        mensagem = f"Erro ao inserir usuário no MySQL: {e}"
+        registra_log(log=mensagem, data_hora=data_agora)
 
 
 # Função principal

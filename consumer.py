@@ -5,6 +5,11 @@ import asyncio  # Para rodar a função assíncrona
 from decouple import config
 from mongo import consulta  # Importando a função assíncrona
 from mysql_db import main
+from registra_log import registra_log
+import datetime as dt
+
+data_agora = dt.datetime.now()
+data_agora = data_agora.strftime("%Y-%m-%d %H:%M:%S")
 
 fila = f"{config('FILA')}"
 DOMAIN = config('DOMAIN')
@@ -17,29 +22,19 @@ asyncio.set_event_loop(loop)
 # Função que processa as mensagens recebidas
 def callback(ch, method, properties, body):
     id_mongo = body.decode()
-    print(f"📨 Mensagem recebida da fila: {id_mongo}")
 
     try:
         resultado = loop.run_until_complete(consulta(id_mongo))
     except Exception as e:
-        print(f"Erro ao buscar usuário: {e}")
-        resultado = None  # Garante que não cause erro ao acessar `None`
+        resultado = None
 
     if resultado:
-        print(f"Resultado da consulta no MongoDB: {resultado}")
-
         nome = resultado.get('nome')
         email = resultado.get('email')
         age = resultado.get('age')
 
-        print(f"Nome do usuário: {nome}")
-        print(f"Email do usuário: {email}")
-        print(f"Idade do usuário: {age}")
-
         # Inserindo no MySQL
         main(nome=nome, email=email, age=age)
-    else:
-        print("⚠️ Usuário não encontrado no MongoDB.")
 
     ch.basic_ack(delivery_tag=method.delivery_tag)  # Confirma que a mensagem foi processada
 

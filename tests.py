@@ -9,10 +9,13 @@ PORT_API = config('PORT_API')
 # URL da API
 url = f"http://{DOMAIN}:{PORT_API}/usuarios/"
 
+nome_novo_usuario = '1515'
+
 # Dados que serão enviados para a API
 usuarios = [
-    {"nome": "1812", "email": "1812@email.com", "age": 30},
-    {"nome": "1813", "email": "1813@email.com", "age": 25}
+    {"nome": nome_novo_usuario, "email": f"{nome_novo_usuario}@email.com", "age": 30},
+    {"nome": nome_novo_usuario, "email": f"{nome_novo_usuario}@email.com", "age": 30},
+    {"nome": nome_novo_usuario, "email": f"{nome_novo_usuario}@email.com", "age": 30},
 ]
 
 # Enviando a requisição POST para a API
