@@ -3,8 +3,8 @@
 import pika
 import asyncio
 from decouple import config
-from mongo import consulta
-from mysql_db import main
+from databases.mongo import consulta
+from databases.mysql_db import main
 from parametros import busca_data_agora
 
 data_agora = busca_data_agora()

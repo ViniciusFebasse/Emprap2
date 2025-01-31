@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import OperationalError
-from registra_log import registra_log
+from logs.registra_log import registra_log
 from decouple import config
 from parametros import busca_data_agora
 

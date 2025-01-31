@@ -1,6 +1,6 @@
 def registra_log(log, data_hora):
     registro = f"{data_hora}: {log}"
-    with open('log.txt', 'a', encoding='utf-8') as f:  # Define a codificação UTF-8
+    with open('logs/log.txt', 'a', encoding='utf-8') as f:  # Define a codificação UTF-8
         f.write(registro + '\n')
 
 if __name__ == "__main__":

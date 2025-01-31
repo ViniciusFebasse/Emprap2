@@ -2,7 +2,7 @@
 
 import pika
 from decouple import config
-from registra_log import registra_log
+from logs.registra_log import registra_log
 from parametros import busca_data_agora
 
 data_agora = busca_data_agora()

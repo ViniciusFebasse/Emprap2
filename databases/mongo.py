@@ -5,7 +5,7 @@ import time
 
 from motor.motor_asyncio import AsyncIOMotorClient
 from bson import ObjectId
-from registra_log import registra_log
+from logs.registra_log import registra_log
 from decouple import config
 
 from parametros import busca_data_agora

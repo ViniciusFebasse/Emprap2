@@ -9,7 +9,7 @@ PORT_API = config('PORT_API')
 # URL da API
 url = f"http://{DOMAIN}:{PORT_API}/usuarios/"
 
-nome_novo_usuario = '1603'
+nome_novo_usuario = '1611'
 
 # Dados que serão enviados para a API
 usuarios = [

@@ -7,10 +7,10 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
-from mongo import inclusao
-from filas import registrar_id_mongo
+from databases.mongo import inclusao
+from rabbit_mq.filas import registrar_id_mongo
 
-from registra_log import registra_log
+from logs.registra_log import registra_log
 from parametros import busca_data_agora
 
 data_agora = busca_data_agora()

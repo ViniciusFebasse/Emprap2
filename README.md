@@ -38,27 +38,36 @@ operação de sucesso ou falha é registrada em um arquivo txt.
 Documentação com ReDoc: http://127.0.0.1:8000/redoc
 Documentação com Swagger: http://127.0.0.1:8000/docs
 
+## Diretórios físicos
+O projeto é constituído dos seguintes diretórios:
+- api: diretório que contém o arquivo principal que contém a API construída com FastAPI
+- databases: diretório que contém o arquivo que encapsula as operações com o MongoDB e MySQL
+- logs: diretório que contém o arquivo que encapsula as operações de registro de logs em um arquivo txt, assim como o
+próprio arquivo de logs
+- rabbit_mq: diretório que contém os arquivos que encapsulam as operações de registro na fila do RabbitMQ e o consumer
+- testes: diretório que contém o arquivo que realiza os testes unitários
+
 ## Arquivos físicos
 O projeto é constituído dos seguintes arquivos:
-- api.py: arquivo principal que contém a API construída com FastAPI
-- mongo.py: arquivo que encapsula as operações com o MongoDB
-- filas.py: arquivo que encapsula as operações de registro na fila do RabbitMQ
-- consumer.py: arquivo que contém o consumer que processa a fila do RabbitMQ
-- mysql_db.py: arquivo que encapsula as operações com o MySQL
-- registra_logs.py: arquivo que encapsula as operações de registro de logs em um arquivo txt
-- log.txt: arquivo que contém os logs de sucesso e falha
-- tests.py: arquivo que contém os testes unitários
+- api/api.py: arquivo principal que contém a API construída com FastAPI
+- databases/mongo.py: arquivo que encapsula as operações com o MongoDB
+- rabbit_mq/filas.py: arquivo que encapsula as operações de registro na fila do RabbitMQ
+- rabbit_mq/consumer.py: arquivo que contém o consumer que processa a fila do RabbitMQ
+- databases/mysql_db.py: arquivo que encapsula as operações com o MySQL
+- logs/registra_logs.py: arquivo que encapsula as operações de registro de logs em um arquivo txt
+- logs/log.txt: arquivo que contém os logs de sucesso e falha
+- testes/tests.py: arquivo que contém os testes unitários
 - requirements.txt: arquivo que contém as bibliotecas utilizadas
 - README.md: arquivo que contém a documentação do projeto
 - .env: arquivo que contém as variáveis de ambiente
 - docker-compose.yml: arquivo que contém a configuração do Docker
 
 ## Fluxo de Execução
-- O arquivo api.py deve ser executado com o comando: ```unicorn api:app --reload``` para rodar a API
-- O arquivo consumer.py deve ser executado com o comando: ```python consumer.py``` para rodar o consumer
-- O arquivo tests.py deve ser executado com o comando: ```python tests.py``` para rodar os testes unitários
-- Quando a requisição de tests.py for recebida, a API processa os dados e os persiste no MongoDB.
+- O arquivo api/api.py deve ser executado com o comando: ```unicorn api.api:app --reload``` para rodar a API
+- O arquivo rabbit_mq/consumer.py deve ser executado com o comando: ```python rabbit_mq/consumer.py``` para rodar o consumer
+- O arquivo testes/tests.py deve ser executado com o comando: ```python testes/tests.py``` para rodar os testes unitários
+- Quando a requisição de testes/tests.py for recebida, a API processa os dados e os persiste no MongoDB.
 - Tendo havido sucesso na geração do registro no Mongo, o id do usuário é enviado para a fila do RabbitMQ pelo próprio 
-api.py
-- O consumer.py que monitora as mensagens, processa o id e faz o registro no MySQL
+api/api.py
+- O rabbit_mq/consumer.py que monitora as mensagens, processa o id e faz o registro no MySQL
 - Cada operação de sucesso ou falha é registrada no arquivo log.txt
