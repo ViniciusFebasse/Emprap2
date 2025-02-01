@@ -3,6 +3,9 @@
 
 ## Desenvolvedor
 - Vinícius Ferreira Bandeira Serra
+- E-mail: vinicius.febasse@gmail.com
+- Contato: (61) 9 8573-3782
+- Data: 01/02/2025
 
 ## Definições
 - LINGUAGEM DE PROGRAMAÇÃO: Python 3.11
@@ -82,10 +85,10 @@ api/api.py
 - A API está disponível em: http://localhost:8000/
 - A documentação da API estará disponível em http://localhost:8000/docs
 - As requisições para inserção de usuários devem ser do tipo POST, para tanto
-  - Acesse o Docker Desktop > Containers > embrap2 > fastapi_app > Exec
+  - Acesse o Docker Desktop > Containers > embrap2 > fastapi_app > Exec ou execute o comando docker exec -it fastapi_app /bin/sh
   - Digite o comando: ```python testes/tests.py``` para rodar os testes unitários
   - Acompanhe as mensagens na URL do RabbitMQ
-  - Acesse Docker Desktop > Containers > embrap2 > maysql_app > Exec
-  - Digite o comando: ```mysql -u root -p``` e a senha: root
+  - Acesse Docker Desktop > Containers > embrap2 > mysql_app > Exec ou execute o comando docker exec -it mysql_app /bin/sh
+  - Digite o comando: ```mysql -u root -p``` e a senha: JCEDo1eou#
   - Digite o comando: ```use embrap2;``` para acessar o database
   - Digite o comando: ```select * from users;``` para visualizar os registros
