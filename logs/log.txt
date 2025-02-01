@@ -31,3 +31,31 @@
 2025-02-01 14:39:18: Usuário de id 679e3245b9f64ba680645ad6 consultado com sucesso no MongoDB
 2025-02-01 14:39:19: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
 2025-02-01 14:39:19: Usuário 1611 inserido com sucesso no MySQL!
+2025-02-01 14:43:38: API de criação de usuários requisitada
+2025-02-01 14:43:38: Usuário 1611 registrado com sucesso no MongoDB
+2025-02-01 14:43:38: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679e3357285673202f7039e3
+2025-02-01 14:43:38: Foram recebidos 1 usuários na listagem
+2025-02-01 14:43:26: Usuário de id 679e3357285673202f7039e3 consultado com sucesso no MongoDB
+2025-02-01 14:43:31: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-02-01 14:43:31: Usuário 1611 inserido com sucesso no MySQL!
+2025-02-01 14:57:32: API de criação de usuários requisitada
+2025-02-01 14:57:32: Usuário 1611 registrado com sucesso no MongoDB
+2025-02-01 14:57:32: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679e3685c38996bcc2caf97f
+2025-02-01 14:57:32: Foram recebidos 1 usuários na listagem
+2025-02-01 14:57:21: Usuário de id 679e3685c38996bcc2caf97f consultado com sucesso no MongoDB
+2025-02-01 14:57:22: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-02-01 14:57:22: Usuário 1611 inserido com sucesso no MySQL!
+2025-02-01 15:18:09: API de criação de usuários requisitada
+2025-02-01 15:18:09: Usuário 1611 registrado com sucesso no MongoDB
+2025-02-01 15:18:09: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679e3b56ac08229b0dace552
+2025-02-01 15:18:09: Foram recebidos 1 usuários na listagem
+2025-02-01 15:17:58: Usuário de id 679e3b56ac08229b0dace552 consultado com sucesso no MongoDB
+2025-02-01 15:17:59: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-02-01 15:17:59: Usuário 1611 inserido com sucesso no MySQL!
+2025-02-01 15:30:49: API de criação de usuários requisitada
+2025-02-01 15:30:49: Usuário 1611 registrado com sucesso no MongoDB
+2025-02-01 15:30:49: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679e3e6da339eb11ad8efca8
+2025-02-01 15:30:49: Foram recebidos 1 usuários na listagem
+2025-02-01 15:30:41: Usuário de id 679e3e6da339eb11ad8efca8 consultado com sucesso no MongoDB
+2025-02-01 15:30:47: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-02-01 15:30:47: Usuário 1611 inserido com sucesso no MySQL!

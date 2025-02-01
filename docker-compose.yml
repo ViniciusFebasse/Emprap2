@@ -54,7 +54,7 @@ services:
     build:
       context: .
     container_name: consumer_app
-    command: python rabbit_mq/consumer.py
+    command: sh -c "sleep 10 && python rabbit_mq/consumer.py"
     depends_on:
       - rabbitmq_app
     environment:

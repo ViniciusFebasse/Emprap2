@@ -62,7 +62,7 @@ O projeto é constituído dos seguintes arquivos:
 - .env: arquivo que contém as variáveis de ambiente
 - docker-compose.yml: arquivo que contém a configuração do Docker
 
-## Fluxo de Execução
+## Fluxo de Execução sem Docker (apenas para instrução, o projeto está configurado com Docker)
 - O arquivo api/api.py deve ser executado com o comando: ```unicorn api.api:app --reload``` para rodar a API
 - O arquivo rabbit_mq/consumer.py deve ser executado com o comando: ```python rabbit_mq/consumer.py``` para rodar o consumer
 - O arquivo testes/tests.py deve ser executado com o comando: ```python testes/tests.py``` para rodar os testes unitários
@@ -71,3 +71,21 @@ O projeto é constituído dos seguintes arquivos:
 api/api.py
 - O rabbit_mq/consumer.py que monitora as mensagens, processa o id e faz o registro no MySQL
 - Cada operação de sucesso ou falha é registrada no arquivo log.txt
+
+## Utilização com Docker Compose
+- Inicialize o serviço do Docker Desktop no PC
+- Abra o CMD
+- Vá na pasta raíz do projeto
+- Rode o comando: ```docker-compose down; docker-compose up --build --remove-orphans``` para subir o container
+- Aguarde a finalização do processo
+- O RabbitMq está disponível em: http://localhost:15673/#/
+- A API está disponível em: http://localhost:8000/
+- A documentação da API estará disponível em http://localhost:8000/docs
+- As requisições para inserção de usuários devem ser do tipo POST, para tanto
+  - Acesse o Docker Desktop > Containers > embrap2 > fastapi_app > Exec
+  - Digite o comando: ```python testes/tests.py``` para rodar os testes unitários
+  - Acompanhe as mensagens na URL do RabbitMQ
+  - Acesse Docker Desktop > Containers > embrap2 > maysql_app > Exec
+  - Digite o comando: ```mysql -u root -p``` e a senha: root
+  - Digite o comando: ```use embrap2;``` para acessar o database
+  - Digite o comando: ```select * from users;``` para visualizar os registros
