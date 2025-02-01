@@ -1,16 +1,34 @@
 # Consumidor de mensagens do RabbitMQ
+import time
 
 import pika
 import asyncio
+import traceback
 from decouple import config
-from databases.mongo import consulta
-from databases.mysql_db import main
-from parametros import busca_data_agora
+
+import os
+import sys
+# Adiciona o diretório raiz do projeto ao PYTHONPATH
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+try:
+    print("Importando módulos...", flush=True)
+    from databases.mongo import consulta
+    from databases.mysql_db import main
+    from parametros import busca_data_agora
+except:
+    traceback.print_exc()
+    print("Erro ao importar módulos.", flush=True)
+
+    from app.databases.mongo import consulta
+    from app.databases.mysql_db import main
+    from app.parametros import busca_data_agora
 
 data_agora = busca_data_agora()
 
 fila = f"{config('FILA')}"
 DOMAIN = config('DOMAIN')
+SERVICE_RABBIT = config('SERVICE_RABBIT')
 
 # Criar um loop de eventos global para evitar o erro "Event loop is closed"
 loop = asyncio.new_event_loop()
@@ -38,7 +56,12 @@ def callback(ch, method, properties, body):
 
 
 # Conectar ao RabbitMQ
-connection = pika.BlockingConnection(pika.ConnectionParameters(DOMAIN))
+try:
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=SERVICE_RABBIT, port=config('PORT_MQ')))
+except:
+    time.sleep(10)
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=SERVICE_RABBIT, port=5672))
+
 channel = connection.channel()
 
 # Garantir que a fila existe

@@ -35,9 +35,11 @@ def criar_conexao():
     try:
         Base.metadata.create_all(engine)
         mensagem = f"Tabelas criadas ou verificadas com sucesso no MySQL '{DATABASE_URL.split('/')[-1]}'."
+        print(mensagem)
         registra_log(log=mensagem, data_hora=data_agora)
     except OperationalError as e:
         mensagem = f"Erro ao conectar ou criar tabelas no banco de dados: {e}"
+        print(mensagem)
         registra_log(log=mensagem, data_hora=data_agora)
 
     return engine
@@ -50,10 +52,12 @@ def inserir_usuario(session, nome, email, idade):
         session.add(usuario)
         session.commit()
         mensagem = f"Usuário {nome} inserido com sucesso no MySQL!"
+        print(mensagem)
         registra_log(log=mensagem, data_hora=data_agora)
 
     except Exception as e:
         mensagem = f"Erro ao inserir usuário no MySQL: {e}"
+        print(mensagem)
         registra_log(log=mensagem, data_hora=data_agora)
 
 

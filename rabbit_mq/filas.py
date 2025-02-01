@@ -1,6 +1,7 @@
 # Implementação de função para registrar ID do Mongo na fila do RabbitMQ
 
 import pika
+import traceback
 from decouple import config
 from logs.registra_log import registra_log
 from parametros import busca_data_agora
@@ -14,7 +15,7 @@ def registrar_id_mongo(id_mongo):
         fila = f"{config('FILA')}"
 
         # Conectar ao RabbitMQ
-        connection = pika.BlockingConnection(pika.ConnectionParameters(DOMAIN))
+        connection = pika.BlockingConnection(pika.ConnectionParameters("rabbitmq_app"))
         channel = connection.channel()
 
         # Declarar a fila (caso ainda não exista)
@@ -22,6 +23,7 @@ def registrar_id_mongo(id_mongo):
 
         # Mensagem a ser enviada
         mensagem = f"ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: {id_mongo}"
+        print(mensagem)
 
         # Publicar a mensagem na fila
         channel.basic_publish(
@@ -40,8 +42,10 @@ def registrar_id_mongo(id_mongo):
 
         return mensagem
     except Exception as e:
-        mensagem = f"Erro ao enviar mensagem para a fila do RabbitMq: {id_mongo}"
+        mensagem = f"Erro ao enviar mensagem para a fila do RabbitMq: {id_mongo}. Erro: {e}"
+        print(mensagem)
         registra_log(log=mensagem, data_hora=data_agora)
+        traceback.print_exc()
         return mensagem
 
 

@@ -47,6 +47,7 @@ async def criar_usuarios(usuarios: List[Usuario]):
             # Verifica os campos do main.Usuario
             if not hasattr(usuario, "nome") or not hasattr(usuario, "email") or not hasattr(usuario, "age"):
                 mensagem = "Erro no processamento da API: os dados dos usuário devem possuir as chaves nome, email e age."
+                print(mensagem)
                 registra_log(log=mensagem, data_hora=data_agora)
                 return mensagem
 
@@ -60,15 +61,19 @@ async def criar_usuarios(usuarios: List[Usuario]):
                     response = registrar_id_mongo(id_mongo)
                     qtd_usuarios_criados += 1
                 else:
-                    return "Erro ao inserir usuário no MongoDB."
+                    mensagem = "Erro ao inserir usuário no MongoDB."
+                    print(mensagem)
+                    return mensagem
 
-        mensagem = f"Foram recebidos com sucesso {len(usuarios)} usuários na listagem e {qtd_usuarios_criados} usuários foram criados no banco de dados."
+        mensagem = f"Foram recebidos {len(usuarios)} usuários na listagem"
+        print(mensagem)
         registra_log(log=mensagem, data_hora=data_agora)
 
         return {"message": mensagem}
     else:
         mensagem = "Erro: os dados enviados não são uma lista de usuários."
         registra_log(log=mensagem, data_hora=data_agora)
+        print(mensagem)
         return "Erro: os dados enviados não são uma lista de usuários."
 
 

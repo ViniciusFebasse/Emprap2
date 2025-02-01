@@ -29,11 +29,16 @@ async def inclusao(nome, email, age):
         # Registro do usuário no Mongo DB
         response = await colecao_usuarios.insert_one(usuario_teste)
         id_mongo = str(response.inserted_id)
-        registra_log(log=f"Usuário {nome} registrado com sucesso no MongoDB", data_hora=data_agora)
+        mensagem = f"Usuário {nome} registrado com sucesso no MongoDB"
+        print(mensagem)
+        registra_log(log=mensagem, data_hora=data_agora)
 
     except Exception as e:
         print(f"Erro ao inserir usuário: {e}")
-        registra_log(log=f"Erro ao inserir usuário no MongoDB", data_hora=data_agora)
+        mensagem = f"Erro ao inserir usuário no MongoDB: {e}"
+        print(mensagem)
+
+        registra_log(log=mensagem, data_hora=data_agora)
         id_mongo = None
 
     return id_mongo
@@ -43,11 +48,15 @@ async def inclusao(nome, email, age):
 async def consulta(id_mongo):
     try:
         resultado = await colecao_usuarios.find_one({"_id": ObjectId(id_mongo)})
+        mensagem = f"Usuário de id {id_mongo} consultado com sucesso no MongoDB"
+        print(mensagem)
         registra_log(log=f"Usuário de id {id_mongo} consultado com sucesso no MongoDB", data_hora=data_agora)
         return resultado
 
     except Exception as e:
-        registra_log(log=f"Erro ao consultar usuário de id {id_mongo} no MongoDB", data_hora=data_agora)
+        mensagem = f"Erro ao consultar usuário de id {id_mongo} no MongoDB"
+        print(mensagem)
+        registra_log(log=f"Erro ao consultar usuário de id {id_mongo} no MongoDB: {e}", data_hora=data_agora)
         return None
 
 

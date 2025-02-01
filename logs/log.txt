@@ -13,3 +13,21 @@
 2025-01-31 16:10:45: Usuário 1611 registrado com sucesso no MongoDB
 2025-01-31 16:10:45: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679d203526a1cdcd18a3bced
 2025-01-31 16:10:45: Foram recebidos com sucesso 1 usuários na listagem e 1 usuários foram criados no banco de dados.
+2025-02-01 14:02:34: API de criação de usuários requisitada
+2025-02-01 14:02:34: Erro ao inserir usuário no MongoDB: mongo_db:27017: [Errno -2] Name or service not known (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 679e297a2142dc29e3720ca6, topology_type: Unknown, servers: [<ServerDescription ('mongo_db', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('mongo_db:27017: [Errno -2] Name or service not known (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+2025-02-01 14:13:54: API de criação de usuários requisitada
+2025-02-01 14:13:54: Usuário 1611 registrado com sucesso no MongoDB
+2025-02-01 14:13:54: Erro ao enviar mensagem para a fila do RabbitMq: 679e2cbba3bd43336d450f4a. Erro: [Errno -2] Name or service not known
+2025-02-01 14:13:54: Foram recebidos 1 usuários na listagem
+2025-02-01 14:20:38: API de criação de usuários requisitada
+2025-02-01 14:20:38: Usuário 1611 registrado com sucesso no MongoDB
+2025-02-01 14:20:38: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679e2e6b9cdb8523b3b7fe17
+2025-02-01 14:20:38: Foram recebidos 1 usuários na listagem
+2025-02-01 14:20:26: Usuário de id 679e2e6b9cdb8523b3b7fe17 consultado com sucesso no MongoDB
+2025-02-01 14:39:29: API de criação de usuários requisitada
+2025-02-01 14:39:29: Usuário 1611 registrado com sucesso no MongoDB
+2025-02-01 14:39:29: ID do usuário no Mongo DB enviado para fila do RabbitMq com sucesso: 679e3245b9f64ba680645ad6
+2025-02-01 14:39:29: Foram recebidos 1 usuários na listagem
+2025-02-01 14:39:18: Usuário de id 679e3245b9f64ba680645ad6 consultado com sucesso no MongoDB
+2025-02-01 14:39:19: Tabelas criadas ou verificadas com sucesso no MySQL 'embrap2'.
+2025-02-01 14:39:19: Usuário 1611 inserido com sucesso no MySQL!

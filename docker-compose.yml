@@ -1,44 +1,65 @@
-version: '3.8'
-
 services:
   fastapi_app:
-    build: .
+    build:
+      context: .
+      args:
+          PORT_API: 8000
     container_name: fastapi_app
     ports:
       - "8000:8000"
     depends_on:
-      - mongo_db
-      - mysql_db
-      - rabbitmq_service
+      - mongo_app
+      - mysql_app
+      - rabbitmq_app
     env_file:
       - .env
-
-  mongo_db:
-    image: mongo:latest
-    container_name: mongo_db
-    restart: always
-    ports:
-      - "27018:27017"  # Ajuste conforme necessário
     volumes:
-      - mongo_data:/data/db
+      - .:/app
 
-  mysql_db:
+  mongo_app:
+    image: mongo:latest
+    container_name: mongo_app
+    restart: always
+    ports:
+      - "${MONGO_PORT}:27017"
+    volumes:
+      - .:/app
+
+
+  mysql_app:
     image: mysql:latest
-    container_name: mysql_db
+    container_name: mysql_app
     restart: always
     ports:
-      - "3307:3306"  # Evitar conflito com o MySQL local
+      - "${PORT_MYSQL}:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "JCeDo1eou#"
-      MYSQL_DATABASE: "embrap2"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+    volumes:
+      - .:/app
 
-  rabbitmq_service:
+
+  rabbitmq_app:
     image: "rabbitmq:management"
-    container_name: rabbitmq_service
+    container_name: rabbitmq_app
     restart: always
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "${PORT_MQ}:5672"
+      - "${PORT_MANAGEMENT}:15672"
+    volumes:
+      - .:/app
 
-volumes:
-  mongo_data:
+
+  consumer_app:
+    build:
+      context: .
+    container_name: consumer_app
+    command: python rabbit_mq/consumer.py
+    depends_on:
+      - rabbitmq_app
+    environment:
+      - DOMAIN=rabbitmq_app
+      - FILA=ids_mongo
+      - PYTHONUNBUFFERED=1
+    volumes:
+       - .:/app
